@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Box, Flex } from "@chakra-ui/react";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../auth/useAuth";
 import Landing from "./Landing";
 import { getImage } from "../lib/cloudinary";
 import { AdvancedImage } from "@cloudinary/react";

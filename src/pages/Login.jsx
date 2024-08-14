@@ -16,7 +16,7 @@ import {
   EmailIcon,
   LockIcon,
 } from "@chakra-ui/icons";
-import { useAuth } from "../hooks/useAuth";
+import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {

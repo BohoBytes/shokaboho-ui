@@ -1,4 +1,4 @@
-import { Center, Flex, Stack } from "@chakra-ui/react";
+import { Center, Flex, Spinner, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { TagCloud } from "react-tagcloud";
 import { getImage } from "../lib/cloudinary";
@@ -67,12 +67,12 @@ export default function Landing({ showLogo = true }) {
             bg={"#f5f5f5"}
             borderRadius={20}
           >
+            {tagData.length == 0 && <Spinner size="md" color="teal" />}
             <TagCloud
               minSize={12}
               maxSize={35}
               tags={tagData}
               onClick={(tag) => console.log(tag)}
-              // style={{ cursor: "pointer" }}
               renderer={CustomRenderer}
             />
           </Flex>
