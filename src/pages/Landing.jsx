@@ -5,6 +5,8 @@ import { getImage } from "../lib/cloudinary";
 import { AdvancedImage } from "@cloudinary/react";
 import db from "../lib/db";
 import { Query } from "appwrite";
+import { pick } from "lodash";
+import { useParams } from "react-router-dom";
 
 const CustomRenderer = (tag, size, color) => (
   <span
@@ -25,14 +27,33 @@ const CustomRenderer = (tag, size, color) => (
 );
 
 export default function Landing({ showLogo = true }) {
+  const { location } = useParams();
   const [conflicts, setConflicts] = useState([]);
 
   const init = async () => {
-    const response = await db.conflicts.list([
-      Query.orderDesc("deaths"),
-      Query.limit(50),
-    ]);
-    setConflicts(response.documents);
+    let conflictList = [];
+    if (!location) {
+      conflictList = await db.conflicts
+        .list([Query.orderDesc("deaths"), Query.limit(50)])
+        .then((res) => res.documents);
+    } else {
+      const countryInfo = await db.countries
+        .list([Query.equal("code", location)])
+        .then((res) => res.documents[0]);
+
+      conflictList = countryInfo.conflicts.map((c) => {
+        const conflict = pick(c, [
+          "displayName",
+          "deaths",
+          "injured",
+          "missing",
+          "arrests",
+        ]);
+        return conflict;
+      });
+    }
+
+    setConflicts(conflictList);
   };
 
   useEffect(() => {
