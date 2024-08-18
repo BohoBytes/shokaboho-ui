@@ -5,9 +5,9 @@ import {
   InputGroup,
   InputRightElement,
   Button,
-  Heading,
   Center,
   InputLeftElement,
+  Box,
 } from "@chakra-ui/react";
 import {
   ArrowRightIcon,
@@ -18,6 +18,35 @@ import {
 } from "@chakra-ui/icons";
 import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import Logo from "../comps/Logo";
+import { Image } from "@chakra-ui/react";
+import authGoogleButton from "../assets/img/authGoogleButton.png";
+import authFacebookButton from "../assets/img/authFacebookButton.png";
+
+const AuthButton = ({ variant }) => {
+  const { authLogin } = useAuth();
+  const authConfig = {
+    google: {
+      src: authGoogleButton,
+      alt: "GoogleButton",
+      cb: () => authLogin(variant),
+    },
+    facebook: {
+      src: authFacebookButton,
+      alt: "FacebookButton",
+      cb: () => authLogin(variant),
+    },
+  }[variant];
+  return (
+    <Image
+      src={authConfig.src}
+      alt={authConfig.alt}
+      width={240}
+      onClick={authConfig.cb}
+      style={{ cursor: "pointer" }}
+    />
+  );
+};
 
 export default function Login() {
   const user = useAuth();
@@ -51,11 +80,24 @@ export default function Login() {
   };
 
   return (
-    <Center height="100vh">
-      <Stack width={400} padding={16} border="1px solid #ccc" borderRadius="lg">
-        <Heading size="md" mb={4} alignSelf="center">
-          {registering ? "Create Account" : "Please Login"}
-        </Heading>
+    <Center height="100vh" bg="#d5d5d3">
+      <Stack
+        width={350}
+        border="1px solid #ccc"
+        borderRadius="lg"
+        bg="#FFF"
+        p={8}
+      >
+        <Box m="auto" mb={4}>
+          <Logo height={60} width={60} radius={100} />
+        </Box>
+        <Stack alignItems="center">
+          <AuthButton variant="facebook" />
+          <AuthButton variant="google" />
+        </Stack>
+        <Box fontSize="lg" fontWeight={700} textAlign="center" m={4}>
+          --- or ---
+        </Box>
         {registering && (
           <Input
             placeholder="Name"

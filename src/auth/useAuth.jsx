@@ -1,6 +1,6 @@
 import { ID } from "appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account } from "../lib/appwrite";
+import { account, OAuthProvider } from "../lib/appwrite";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,12 +13,13 @@ export function AuthProvider(props) {
 
   async function login(email, password) {
     try {
-      const loggedIn = await account.createEmailPasswordSession(
-        email,
-        password
-      );
-      setUser(loggedIn);
-      navigate("/home");
+      await account.createEmailPasswordSession(email, password).then((res) => {
+        account.get(res.userId).then((res) => {
+          setUser(res);
+          localStorage.setItem("user", JSON.stringify(res));
+          navigate("/home");
+        });
+      });
     } catch (error) {
       toast({
         title: "Error occured",
@@ -30,15 +31,30 @@ export function AuthProvider(props) {
     }
   }
 
+  async function authLogin(social) {
+    console.log(social);
+    const provider = {
+      google: OAuthProvider.Google,
+      facebook: OAuthProvider.Facebook,
+    }[social];
+
+    account.createOAuth2Session(
+      provider,
+      import.meta.env.VITE_OAUTH_SUCCESS_URL,
+      import.meta.env.VITE_OAUTH_FAILURE_URL
+    );
+  }
+
   async function logout() {
     await account.deleteSession("current");
     setUser(null);
+    localStorage.removeItem("user");
     window.location.replace("/login");
   }
 
-  async function register(email, password) {
+  async function register(email, password, name, phone) {
     try {
-      await account.create(ID.unique(), email, password);
+      await account.create(ID.unique(), email, password, name, [{ phone }]);
       await login(email, password);
     } catch (error) {
       toast({
@@ -65,7 +81,15 @@ export function AuthProvider(props) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ current: user, login, logout, register }}>
+    <AuthContext.Provider
+      value={{
+        current: user,
+        login,
+        authLogin,
+        logout,
+        register,
+      }}
+    >
       {props.children}
     </AuthContext.Provider>
   );
