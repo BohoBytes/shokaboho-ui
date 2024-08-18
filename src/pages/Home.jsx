@@ -2,12 +2,10 @@ import React from "react";
 import { Button, Box, Flex } from "@chakra-ui/react";
 import { useAuth } from "../auth/useAuth";
 import Landing from "./Landing";
-import { getImage } from "../lib/cloudinary";
-import { AdvancedImage } from "@cloudinary/react";
+import Logo from "../comps/Logo";
 
 export default function Home() {
-  const user = useAuth();
-  const { current, logout } = user;
+  const { current, logout } = useAuth();
 
   return (
     <Box>
@@ -20,13 +18,7 @@ export default function Home() {
           height="70px"
         >
           <Box mr="auto">
-            <AdvancedImage
-              cldImg={getImage("shokaboho_logo1", {
-                height: 60,
-                width: 60,
-                radius: 100,
-              })}
-            />
+            <Logo height={60} width={60} radius={100} />
           </Box>
           <Box fontSize="sm" alignSelf="center" mr={30}>
             Welcome, {current.name}

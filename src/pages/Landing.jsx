@@ -1,12 +1,11 @@
 import { Center, Flex, Spinner, Stack } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { TagCloud } from "react-tagcloud";
-import { getImage } from "../lib/cloudinary";
-import { AdvancedImage } from "@cloudinary/react";
 import db from "../lib/db";
 import { Query } from "appwrite";
 import { pick } from "lodash";
 import { useParams } from "react-router-dom";
+import Logo from "../comps/Logo";
 
 const CustomRenderer = (tag, size, color) => (
   <span
@@ -68,17 +67,7 @@ export default function Landing({ showLogo = true }) {
   return (
     <Center height="100vh" bg="#d5d5d3">
       <Stack alignItems="center">
-        {showLogo && (
-          <AdvancedImage
-            cldImg={getImage("shokaboho_logo1", {
-              height: 100,
-              width: 100,
-              radius: 100,
-            })}
-            height="100"
-            width="100"
-          />
-        )}
+        {showLogo && <Logo height={100} width={100} radius={100} />}
         {conflicts && (
           <Flex
             width="50%"
