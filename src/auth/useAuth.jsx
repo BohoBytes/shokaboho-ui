@@ -17,7 +17,7 @@ export function AuthProvider(props) {
         account.get(res.userId).then((res) => {
           setUser(res);
           localStorage.setItem("user", JSON.stringify(res));
-          navigate("/home");
+          navigate("/");
         });
       });
     } catch (error) {

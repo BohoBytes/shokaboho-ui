@@ -1,25 +1,21 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./auth/ProtectedRoute";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
-import Home from "./pages/Home";
 import { AuthProvider } from "./auth/useAuth";
+import Conflict from "./pages/Conflict";
+import NotFound from "./components/common/NotFound";
+import Region from "./pages/Location";
 
 const App = () => (
   <AuthProvider>
     <Routes>
       <Route path="/" element={<Landing />} />
-      <Route path="/:location" element={<Landing />} />
+      <Route path="/:conflict" element={<Conflict />} />
+      <Route path="/l/:location" element={<Region />} />
       <Route path="/login" element={<Login />} />
-      <Route
-        path="/home"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
+      {/* <Route path="/not-found" element={<NotFound />} /> */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   </AuthProvider>
 );

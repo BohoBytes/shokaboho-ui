@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/icons";
 import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import Logo from "../comps/Logo";
+import Logo from "../components/layout/Logo";
 import { Image } from "@chakra-ui/react";
 import authGoogleButton from "../assets/img/authGoogleButton.png";
 import authFacebookButton from "../assets/img/authFacebookButton.png";
@@ -89,7 +89,7 @@ export default function Login() {
         p={8}
       >
         <Box m="auto" mb={4}>
-          <Logo height={60} width={60} radius={100} />
+          <Logo height={60} width={60} radius={100} to="/" />
         </Box>
         <Stack alignItems="center">
           <AuthButton variant="facebook" />
