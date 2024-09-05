@@ -32,7 +32,6 @@ export function AuthProvider(props) {
   }
 
   async function authLogin(social) {
-    console.log(social);
     const provider = {
       google: OAuthProvider.Google,
       facebook: OAuthProvider.Facebook,

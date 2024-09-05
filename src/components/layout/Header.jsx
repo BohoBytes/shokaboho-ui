@@ -1,41 +1,19 @@
 import React from "react";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Avatar, Button, Flex, Text } from "@chakra-ui/react";
 import { useAuth } from "../../auth/useAuth";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import { ChevronLeftIcon, ChevronRightIcon } from "@chakra-ui/icons";
-import { HiHome } from "react-icons/hi2";
-
-const AuthButton = ({ label, variant, onClick }) => {
-  return (
-    <Button size="xs" colorScheme="teal" variant={variant} onClick={onClick}>
-      {label}
-    </Button>
-  );
-};
+import { useNavigate } from "react-router-dom";
+import Crumbs from "./Crumbs";
+import MainMenu from "./MainMenu";
+import { avatars } from "../../lib/appwrite";
 
 export default function Header() {
-  const { current, logout } = useAuth();
+  const { current } = useAuth();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
-
-  const paths = pathname.split("/");
-  const crumbs = paths
-    .map((path) => {
-      switch (path) {
-        case "":
-          return { label: <HiHome />, to: "/" };
-        case "l":
-          return undefined;
-        default:
-          return { label: path, to: "#" };
-      }
-    })
-    .filter(Boolean);
+  const userInitials = avatars.getInitials();
 
   return (
     <Flex
-      px={2}
+      pl={2}
       height={50}
       justifyContent="space-between"
       alignItems={"center"}
@@ -44,44 +22,24 @@ export default function Header() {
       <>
         {current ? (
           <Flex alignItems="center">
-            <Text fontSize="xs" mr={5}>
-              {current ? `Welcome, ${current.name}` : ""}
+            <Text fontSize="xs" fontWeight={700} mr={2}>
+              {current ? `${current.name}` : ""}
             </Text>
-            <AuthButton
-              variant="solid"
-              onClick={() => logout()}
-              label="Logout"
-            />
+            <Avatar size="sm" src={userInitials} />
+            <MainMenu />
           </Flex>
         ) : (
-          <AuthButton
+          <Button
+            size="xs"
+            colorScheme="teal"
             variant="ghost"
             onClick={() => navigate("/login")}
-            label="Login"
-          />
+          >
+            Login
+          </Button>
         )}
       </>
-      {pathname && pathname !== "/" && (
-        <>
-          <Breadcrumb
-            spacing="8px"
-            separator={<ChevronRightIcon color="teal" />}
-          >
-            {crumbs.map((crumb, index) => (
-              <BreadcrumbItem key={index}>
-                <BreadcrumbLink
-                  as={Link}
-                  to={`${crumb.to}`}
-                  color="teal"
-                  fontSize="xs"
-                >
-                  {crumb.label}
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-            ))}
-          </Breadcrumb>
-        </>
-      )}
+      <Crumbs />
     </Flex>
   );
 }

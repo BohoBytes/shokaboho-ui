@@ -15,7 +15,7 @@ export default function Main({ children }) {
       templateAreas={`"header"
                   "main"
                   "footer"`}
-      gridTemplateRows={"50px 1fr 50px"}
+      gridTemplateRows={"50px 1fr 70px"}
       gridTemplateColumns={"1fr"}
       h="100vh"
       color="blackAlpha.700"
