@@ -13,7 +13,7 @@ export default function ConflictInfo({
 }) {
   return (
     <BaseCard>
-      <Accordion defaultIndex={[0, 1]} allowMultiple>
+      <Accordion defaultIndex={[0, 1, 2]} allowMultiple>
         <SingleAccordionItem
           title="Time Period"
           data={[

@@ -4,7 +4,7 @@ import ConflictCard from "../conflict/ConflictCard";
 
 export default function LocationConflicts({ location: { conflicts } }) {
   return (
-    <Box w="74%" ml="10px">
+    <Box ml="10px">
       {conflicts.length > 0 && (
         <SimpleGrid
           spacing={4}

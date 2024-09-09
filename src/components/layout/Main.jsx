@@ -5,6 +5,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import Footer from "./Footer";
 import {
   BODY_BG_COLOR,
+  FONT_COLOR,
   FOOTER_BG_COLOR,
   HEADER_BG_COLOR,
 } from "../../lib/constants";
@@ -18,7 +19,7 @@ export default function Main({ children }) {
       gridTemplateRows={"50px 1fr 70px"}
       gridTemplateColumns={"1fr"}
       h="100vh"
-      color="blackAlpha.700"
+      color={FONT_COLOR}
     >
       <GridItem pl="1" area={"header"} bg={HEADER_BG_COLOR}>
         <Header />
