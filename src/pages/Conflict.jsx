@@ -1,14 +1,4 @@
-import {
-  Accordion,
-  Box,
-  Center,
-  Flex,
-  Heading,
-  SimpleGrid,
-  Spinner,
-  Text,
-  useToast,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Spinner, Text, WrapItem } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Main from "../components/layout/Main";
@@ -57,12 +47,22 @@ export default function Conflict() {
             </Text>
           )}
 
-          <Flex my={10} justifyContent="flex-start">
-            <ConflictInfo conflict={conflictInfo} />
-            <ConflictDescription conflict={conflictInfo} />
-          </Flex>
-
           <ConflictStatCards conflict={conflictInfo} />
+
+          <Flex
+            gap={2}
+            justifyContent="center"
+            flexWrap="wrap"
+            mb={10}
+            minW={350}
+          >
+            <WrapItem width={["100%", "100%", "25%"]}>
+              <ConflictInfo conflict={conflictInfo} />
+            </WrapItem>
+            <WrapItem width={["100%", "100%", "73%"]}>
+              <ConflictDescription conflict={conflictInfo} />
+            </WrapItem>
+          </Flex>
         </Box>
       )}
     </Main>

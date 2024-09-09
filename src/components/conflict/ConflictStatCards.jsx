@@ -1,5 +1,5 @@
 import React from "react";
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Flex, Text, WrapItem } from "@chakra-ui/react";
 import BaseCard from "../common/BaseCard";
 
 export default function ConflictStatCards({ conflict }) {
@@ -10,24 +10,32 @@ export default function ConflictStatCards({ conflict }) {
     { type: "missing", bg: "purple.900", color: "white" },
   ];
   return (
-    <SimpleGrid columns={4} spacing={10} my={10}>
+    <Flex
+      textAlign="center"
+      flexWrap="wrap"
+      gap={3}
+      my={10}
+      justifyContent="center"
+    >
       {casualties.map(({ type, bg, color }, key) => (
-        <BaseCard
-          key={key}
-          title={type[0].toUpperCase() + type.substring(1)}
-          bg={bg}
-          color={color}
-          shadow="dark-lg"
-        >
-          {
-            <Text fontSize="4xl" textAlign="center">
-              {`${(Math.floor(conflict[type] / 10) * 10).toLocaleString()}${
-                conflict[type] / 10 > 1 ? "+" : ""
-              }`}
-            </Text>
-          }
-        </BaseCard>
+        <WrapItem key={key} width="24%" minW="180px">
+          <BaseCard
+            key={key}
+            title={type[0].toUpperCase() + type.substring(1)}
+            bg={bg}
+            color={color}
+            shadow="dark-lg"
+          >
+            {
+              <Text fontSize="4xl" textAlign="center">
+                {`${(Math.floor(conflict[type] / 10) * 10).toLocaleString()}${
+                  conflict[type] / 10 > 1 ? "+" : ""
+                }`}
+              </Text>
+            }
+          </BaseCard>
+        </WrapItem>
       ))}
-    </SimpleGrid>
+    </Flex>
   );
 }

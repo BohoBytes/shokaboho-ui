@@ -6,14 +6,13 @@ import { MdAccessTime } from "react-icons/md";
 import { IoTime } from "react-icons/io5";
 import { FaHandPointRight } from "react-icons/fa";
 import { IoMdGlobe } from "react-icons/io";
-import { get } from "lodash";
 import { getDateString } from "../../lib/utils";
 
 export default function ConflictInfo({
   conflict: { startDate, endDate, altNames, countries },
 }) {
   return (
-    <BaseCard w="25%">
+    <BaseCard>
       <Accordion defaultIndex={[0, 1]} allowMultiple>
         <SingleAccordionItem
           title="Time Period"

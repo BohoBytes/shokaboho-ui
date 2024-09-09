@@ -46,8 +46,6 @@ export default function ConflictDescription({
 
   return (
     <BaseCard
-      w="74%"
-      st={{ marginLeft: "10px" }}
       note={descriptionSource ? `Source: ${descriptionSource}` : undefined}
     >
       {loading && (
