@@ -7,6 +7,7 @@ import Main from "../components/layout/Main";
 import LocationInfo from "../components/location/LocationInfo";
 import LocationConflicts from "../components/location/LocationConflicts";
 import { getCountryInfo } from "../lib/utils";
+import WithMenu from "../components/layout/WithMenu";
 
 export default function Region() {
   const { location } = useParams();
@@ -39,18 +40,23 @@ export default function Region() {
       {!locationInfo && <Spinner size="md" color="teal" />}
       {locationInfo && (
         <Box px={10} width="100%">
-          <Heading textAlign="center" my={3}>
+          <Heading textAlign="center" my={10}>
             {name} {flag}
           </Heading>
 
-          <Flex my={10} justifyContent="flex-start" width="100%">
+          <WithMenu
+            menuChildren={<LocationInfo location={locationInfo} />}
+            contentChildren={<LocationConflicts location={locationInfo} />}
+          />
+
+          {/* <Flex my={10} justifyContent="flex-start" width="100%">
             <Box width="25%" minW={185}>
               <LocationInfo location={locationInfo} />
             </Box>
             <Box width="74%">
               <LocationConflicts location={locationInfo} />
             </Box>
-          </Flex>
+          </Flex> */}
         </Box>
       )}
     </Main>

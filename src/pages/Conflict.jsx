@@ -7,6 +7,7 @@ import { Query } from "appwrite";
 import ConflictDescription from "../components/conflict/ConflictDescription";
 import ConflictInfo from "../components/conflict/ConflictInfo";
 import ConflictStatCards from "../components/conflict/ConflictStatCards";
+import WithMenu from "../components/layout/WithMenu";
 
 export default function Conflict() {
   const navigate = useNavigate();
@@ -37,7 +38,7 @@ export default function Conflict() {
       {!conflictInfo && <Spinner size="md" color="teal" />}
       {conflictInfo && (
         <Box px={10} width="100%">
-          <Heading textAlign="center" my={3}>
+          <Heading textAlign="center" my={10}>
             {displayName}
           </Heading>
 
@@ -49,20 +50,10 @@ export default function Conflict() {
 
           <ConflictStatCards conflict={conflictInfo} />
 
-          <Flex
-            gap={2}
-            justifyContent="center"
-            flexWrap="wrap"
-            mb={10}
-            minW={350}
-          >
-            <WrapItem width={["100%", "100%", "25%"]}>
-              <ConflictInfo conflict={conflictInfo} />
-            </WrapItem>
-            <WrapItem width={["100%", "100%", "73%"]}>
-              <ConflictDescription conflict={conflictInfo} />
-            </WrapItem>
-          </Flex>
+          <WithMenu
+            menuChildren={<ConflictInfo conflict={conflictInfo} />}
+            contentChildren={<ConflictDescription conflict={conflictInfo} />}
+          />
         </Box>
       )}
     </Main>

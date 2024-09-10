@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 import { ChevronRightIcon } from "@chakra-ui/icons";
 import { HiHome } from "react-icons/hi";
+import { IoEarth } from "react-icons/io5";
 
 export default function Crumbs() {
   const { pathname } = useLocation();
@@ -13,7 +14,7 @@ export default function Crumbs() {
         case "":
           return { label: <HiHome />, to: "/" };
         case "l":
-          return undefined;
+          return { label: <IoEarth />, to: "/world" };
         default:
           return { label: path, to: "#" };
       }

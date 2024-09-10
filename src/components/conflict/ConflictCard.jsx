@@ -21,7 +21,11 @@ export default function ConflictCard({
   const navigate = useNavigate();
   const totalCasualties = deaths + arrests + injured + missing;
   return (
-    <Flex onClick={() => navigate(`/${uri}`)} style={{ cursor: "pointer" }}>
+    <Flex
+      onClick={() => navigate(`/${uri}`)}
+      style={{ cursor: "pointer" }}
+      width="100%"
+    >
       <BaseCard>
         <Stat>
           <StatLabel>{displayName}</StatLabel>
