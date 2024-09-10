@@ -1,6 +1,6 @@
 import { ID } from "appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account, OAuthProvider } from "../lib/appwrite";
+import { account, OAuthProvider, getAvatarInitials } from "../lib/appwrite";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export function AuthProvider(props) {
       await account.createEmailPasswordSession(email, password).then((res) => {
         account.get(res.userId).then((res) => {
           setUser(res);
-          localStorage.setItem("user", JSON.stringify(res));
+          // localStorage.setItem("user", JSON.stringify(res));
           navigate("/");
         });
       });
@@ -47,7 +47,7 @@ export function AuthProvider(props) {
   async function logout() {
     await account.deleteSession("current");
     setUser(null);
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
     window.location.replace("/login");
   }
 

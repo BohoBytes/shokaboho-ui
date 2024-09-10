@@ -7,9 +7,9 @@ import { Query } from "appwrite";
 import ConflictDescription from "../components/conflict/ConflictDescription";
 import ConflictInfo from "../components/conflict/ConflictInfo";
 import ConflictStatCards from "../components/conflict/ConflictStatCards";
-import WithMenu from "../components/layout/WithMenu";
+import WithSideBar from "../components/layout/WithSideBar";
 
-export default function Conflict() {
+export default function ConflictScreen() {
   const navigate = useNavigate();
   const { conflict } = useParams();
   const [conflictInfo, setConflictInfo] = useState(null);
@@ -32,25 +32,26 @@ export default function Conflict() {
   }, [conflict]);
 
   const { displayName, name } = conflictInfo || {};
+  const hasAltName = displayName !== name;
 
   return (
     <Main>
       {!conflictInfo && <Spinner size="md" color="teal" />}
       {conflictInfo && (
         <Box px={10} width="100%">
-          <Heading textAlign="center" my={10}>
+          <Heading textAlign="center" mt={10} mb={!hasAltName ? 10 : undefined}>
             {displayName}
           </Heading>
 
-          {displayName !== name && (
-            <Text textAlign="center" fontSize="md" color="pink.800">
+          {hasAltName && (
+            <Text textAlign="center" fontSize="2xl" color="pink.800" mb={10}>
               ({name})
             </Text>
           )}
 
           <ConflictStatCards conflict={conflictInfo} />
 
-          <WithMenu
+          <WithSideBar
             menuChildren={<ConflictInfo conflict={conflictInfo} />}
             contentChildren={<ConflictDescription conflict={conflictInfo} />}
           />

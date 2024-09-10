@@ -1,10 +1,15 @@
-import { getCountryData, getEmojiFlag } from "countries-list";
+import {
+  getCountryData,
+  getCountryDataList,
+  getEmojiFlag,
+} from "countries-list";
 import {
   getAllContinents,
   getAllCurrencies,
   getAllLanguages,
 } from "./appwrite";
 import { SITE_LOCALE } from "./constants";
+import { groupBy } from "lodash";
 
 export const getDateString = (
   date,
@@ -55,4 +60,30 @@ export const getCountryInfo = async (alpha2Code) => {
   Object.assign(countryInfo, { currencies: currs });
 
   return countryInfo;
+};
+
+export const getConflictsPerCountry = (conflicts) => {
+  const conflictsPerCountry = {};
+  conflicts.map((conflict) => {
+    conflict.countries.map(({ code }) => {
+      if (!conflictsPerCountry[code]) {
+        conflictsPerCountry[code] = [conflict];
+      } else {
+        conflictsPerCountry[code].push(conflict);
+      }
+    });
+  });
+  return conflictsPerCountry;
+};
+
+export const getContinentsWithCountries = (continents) => {
+  const countriesGroupedByContinent = groupBy(
+    getCountryDataList(),
+    "continent"
+  );
+  continents.map((continent) => {
+    continent.countries = countriesGroupedByContinent[continent.code];
+  });
+
+  return continents;
 };

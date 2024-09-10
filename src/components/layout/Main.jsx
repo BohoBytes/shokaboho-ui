@@ -1,6 +1,6 @@
 import { Center, Flex } from "@chakra-ui/react";
 import Header from "./Header";
-import Logo from "./Logo";
+import Logo from "../common/Logo";
 import { Grid, GridItem } from "@chakra-ui/react";
 import Footer from "./Footer";
 import {

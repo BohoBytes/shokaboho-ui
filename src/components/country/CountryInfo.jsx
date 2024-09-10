@@ -15,7 +15,7 @@ const CountryInfoSigleItem = ({ title, value }) => (
   </ListItem>
 );
 
-export default function LocationInfo({ location: { code, altNames } }) {
+export default function CountryInfo({ country: { code, altNames } }) {
   const [countryInfo, setCountryInfo] = useState({});
 
   const init = async () => {
@@ -25,8 +25,6 @@ export default function LocationInfo({ location: { code, altNames } }) {
   useEffect(() => {
     init();
   }, []);
-
-  console.log(countryInfo);
 
   const { continent, codes, languages, capital, currencies, phone } =
     countryInfo;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, WrapItem } from "@chakra-ui/react";
 
-export default function WithMenu({ menuChildren, contentChildren }) {
+export default function WithSideBar({ menuChildren, contentChildren }) {
   return (
     <Flex
       gap={2}

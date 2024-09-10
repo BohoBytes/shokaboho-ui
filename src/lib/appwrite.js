@@ -15,7 +15,9 @@ client
 
 export const account = new Account(client);
 export const databases = new Databases(client);
-export const avatars = new Avatars(client);
+
+const avatars = new Avatars(client);
+export const getAvatarInitials = (name) => avatars.getInitials(name);
 
 const locale = new Locale(client);
 export const getAllContinents = async () =>

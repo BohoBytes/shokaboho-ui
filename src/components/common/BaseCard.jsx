@@ -11,17 +11,20 @@ export default function BaseCard({
   note,
   st,
   children,
+  onClick,
+  stripped = false,
 }) {
   return (
     <Card
       width={w}
-      borderRadius={20}
+      borderRadius={!stripped ? 20 : 0}
       bg={bg}
       color={color}
-      boxShadow={shadow ? shadow : undefined}
+      boxShadow={shadow ? shadow : stripped ? "none" : undefined}
       style={st}
+      onClick={onClick}
     >
-      <CardBody>
+      <CardBody padding={stripped ? 0 : 5}>
         {img && <img src={img} alt="img" borderRadius="lg" />}
         {title && <Heading size="md">{title}</Heading>}
         {children}

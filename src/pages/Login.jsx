@@ -18,7 +18,7 @@ import {
 } from "@chakra-ui/icons";
 import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
-import Logo from "../components/layout/Logo";
+import Logo from "../components/common/Logo";
 import { Image } from "@chakra-ui/react";
 import authGoogleButton from "../assets/img/authGoogleButton.png";
 import authFacebookButton from "../assets/img/authFacebookButton.png";

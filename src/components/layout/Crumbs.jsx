@@ -14,7 +14,7 @@ export default function Crumbs() {
         case "":
           return { label: <HiHome />, to: "/" };
         case "l":
-          return { label: <IoEarth />, to: "/world" };
+          return { label: <IoEarth />, to: "/l" };
         default:
           return { label: path, to: "#" };
       }
