@@ -1,6 +1,6 @@
 import { ID } from "appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account, OAuthProvider, getAvatarInitials } from "../lib/appwrite";
+import { account, OAuthProvider, getAvatarInitials } from "../../lib/appwrite";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
@@ -48,7 +48,7 @@ export function AuthProvider(props) {
     await account.deleteSession("current");
     setUser(null);
     // localStorage.removeItem("user");
-    window.location.replace("/login");
+    window.location.replace("/auth");
   }
 
   async function register(email, password, name, phone) {

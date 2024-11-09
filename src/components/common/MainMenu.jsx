@@ -13,7 +13,7 @@ import {
   HEADER_BG_COLOR,
   HEADER_BG_LIGHT,
 } from "../../lib/constants";
-import { useAuth } from "../../auth/useAuth";
+import { useAuth } from "../auth/useAuth";
 
 export default function MainMenu() {
   const { logout } = useAuth();

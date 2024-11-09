@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, Button, Flex, Text } from "@chakra-ui/react";
-import { useAuth } from "../../auth/useAuth";
+import { useAuth } from "../auth/useAuth";
 import { useNavigate } from "react-router-dom";
 import Crumbs from "./Crumbs";
 import MainMenu from "../common/MainMenu";
@@ -33,7 +33,7 @@ export default function Header() {
             size="xs"
             colorScheme="teal"
             variant="ghost"
-            onClick={() => navigate("/login")}
+            onClick={() => navigate("/auth")}
           >
             Login
           </Button>
