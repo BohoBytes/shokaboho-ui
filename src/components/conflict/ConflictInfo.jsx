@@ -36,7 +36,7 @@ export default function ConflictInfo({
               value: code,
               icon: IoMdGlobe,
               color: "green.500",
-              link: `/l/${code}`,
+              link: `/w/c/${code}`,
             }))}
           />
         )}

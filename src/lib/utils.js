@@ -9,7 +9,7 @@ import {
   getAllLanguages,
 } from "./appwrite";
 import { SITE_LOCALE } from "./constants";
-import { groupBy } from "lodash";
+import { groupBy, flatMapDeep, partition, uniq } from "lodash";
 
 export const getDateString = (
   date,
@@ -51,7 +51,7 @@ export const getCountryInfo = async (alpha2Code) => {
   // continent
   const allContinents = await getAllContinents();
   const cont = allContinents.find(({ code }) => code === continent).name;
-  Object.assign(countryInfo, { continent: cont });
+  Object.assign(countryInfo, { continent: cont, continentCode: continent });
 
   const allCurrencies = await getAllCurrencies();
   const currs = currency.map((currency) =>
@@ -76,7 +76,8 @@ export const getConflictsPerCountry = (conflicts) => {
   return conflictsPerCountry;
 };
 
-export const getContinentsWithCountries = (continents) => {
+export const getContinentsWithCountries = async () => {
+  const continents = await getAllContinents();
   const countriesGroupedByContinent = groupBy(
     getCountryDataList(),
     "continent"
@@ -86,4 +87,30 @@ export const getContinentsWithCountries = (continents) => {
   });
 
   return continents;
+};
+
+export const getContinentsWithConflicts = async (conflicts) => {
+  const conflictsByCountry = getConflictsPerCountry(conflicts);
+  const contientsWithCountries = await getContinentsWithCountries();
+
+  // merge conflict data into continets dictionary
+  contientsWithCountries.map((continent) => {
+    continent.countries.map((country) => {
+      country.conflicts = conflictsByCountry[country.iso2];
+    });
+    continent.uniqueConflicts = uniq(
+      flatMapDeep(continent.countries, "conflicts")
+    ).filter(Boolean);
+  });
+
+  // show only continents that have any conflicts
+  const conflictsPerContinents = partition(
+    contientsWithCountries,
+    (continent) => continent.uniqueConflicts.length
+  );
+
+  return {
+    conflicted: conflictsPerContinents[0],
+    peaceful: conflictsPerContinents[1],
+  };
 };

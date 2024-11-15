@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Spinner, Text, WrapItem } from "@chakra-ui/react";
+import { Box, Heading, Spinner, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Main from "../components/layout/Main";
@@ -6,7 +6,6 @@ import db from "../lib/db";
 import { Query } from "appwrite";
 import ConflictDescription from "../components/conflict/ConflictDescription";
 import ConflictInfo from "../components/conflict/ConflictInfo";
-import ConflictStatCards from "../components/conflict/ConflictStatCards";
 import WithSideBar from "../components/layout/WithSideBar";
 
 export default function ConflictScreen() {
@@ -48,8 +47,6 @@ export default function ConflictScreen() {
               ({name})
             </Text>
           )}
-
-          <ConflictStatCards conflict={conflictInfo} />
 
           <WithSideBar
             menuChildren={<ConflictInfo conflict={conflictInfo} />}

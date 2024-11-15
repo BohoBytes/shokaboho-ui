@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Box, Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Box, Heading, Spinner } from "@chakra-ui/react";
 import { useNavigate, useParams } from "react-router-dom";
 import db from "../lib/db";
 import { Query } from "appwrite";

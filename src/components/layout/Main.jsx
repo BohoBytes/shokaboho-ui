@@ -25,7 +25,12 @@ export default function Main({ children }) {
         <Header />
       </GridItem>
       <GridItem pl="1" area={"main"} bg={BODY_BG_COLOR}>
-        <Center flexDirection="column" height="100%">
+        <Center
+          flexDirection="column"
+          height="100%"
+          maxWidth={1440}
+          margin="auto"
+        >
           <Logo height={100} width={100} radius={100} to={"/"} />
           <Flex justifyContent="center" width="100%">
             {children}

@@ -6,7 +6,7 @@ export default function BaseStatCard({ label, value, info, ...props }) {
   return (
     <BaseCard {...props}>
       <Stat>
-        <StatLabel>{label}</StatLabel>
+        <StatLabel mb={3}>{label}</StatLabel>
         <StatNumber>{value}</StatNumber>
         <StatHelpText>{info}</StatHelpText>
       </Stat>

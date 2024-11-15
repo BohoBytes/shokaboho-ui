@@ -56,7 +56,7 @@ export default function CountryInfo({ country: { code, altNames } }) {
         <Accordion defaultIndex={[0]} allowToggle my={3}>
           <SingleAccordionItem
             title="Curencies"
-            data={currencies.map(({ name, symbolNative }) => ({
+            data={currencies.filter(Boolean).map(({ name, symbolNative }) => ({
               value: name + " (" + symbolNative + ")",
               icon: FaHandPointRight,
               color: "green.500",

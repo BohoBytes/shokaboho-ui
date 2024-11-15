@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Text, Flex, Spinner, useToast } from "@chakra-ui/react";
+import { Text, Flex, Spinner, useToast, VStack } from "@chakra-ui/react";
 import BaseCard from "../common/BaseCard";
 import { gptFetchInfo } from "../../lib/chatgpt";
 import parse from "html-react-parser";
+import ConflictStatCards from "./ConflictStatCards";
 
 export default function ConflictDescription({
+  conflict,
   conflict: { name, description },
 }) {
   const toast = useToast();
@@ -45,19 +47,22 @@ export default function ConflictDescription({
   }, [description]);
 
   return (
-    <BaseCard
-      note={descriptionSource ? `Source: ${descriptionSource}` : undefined}
-    >
-      {loading && (
-        <Flex alignItems="center" justifyContent="center" h="100%">
-          <Spinner size="md" color="teal" />
-        </Flex>
-      )}
-      {typeof descriptionInfo === "string" && (
-        <Text fontSize="lg" m={5}>
-          {parse(descriptionInfo)}
-        </Text>
-      )}
-    </BaseCard>
+    <VStack spacing={2} width="100%">
+      <ConflictStatCards conflict={conflict} />
+      <BaseCard
+        note={descriptionSource ? `Source: ${descriptionSource}` : undefined}
+      >
+        {loading && (
+          <Flex alignItems="center" justifyContent="center" h="100%">
+            <Spinner size="md" color="teal" />
+          </Flex>
+        )}
+        {typeof descriptionInfo === "string" && (
+          <Text fontSize="lg" m={5}>
+            {parse(descriptionInfo)}
+          </Text>
+        )}
+      </BaseCard>
+    </VStack>
   );
 }
