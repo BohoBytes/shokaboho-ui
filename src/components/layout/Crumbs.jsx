@@ -53,7 +53,11 @@ export default function Crumbs() {
         default:
           return {
             label:
-              continentCode === path ? continentInfo?.name : countryInfo?.flag,
+              continentCode === path
+                ? continentInfo?.name
+                : countryCode === path
+                ? countryInfo?.flag
+                : path,
             to: "#",
           };
       }
