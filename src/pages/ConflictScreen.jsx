@@ -39,12 +39,12 @@ export default function ConflictScreen() {
       {conflictInfo && (
         <Box px={10} width="100%">
           <Heading textAlign="center" mt={10} mb={!hasAltName ? 10 : undefined}>
-            {displayName}
+            {name}
           </Heading>
 
           {hasAltName && (
             <Text textAlign="center" fontSize="2xl" color="pink.800" mb={10}>
-              ({name})
+              {displayName}
             </Text>
           )}
 

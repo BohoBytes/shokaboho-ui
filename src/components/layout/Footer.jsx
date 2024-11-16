@@ -1,5 +1,6 @@
 import React from "react";
 import { AbsoluteCenter, Box, Flex, Link, Text } from "@chakra-ui/react";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 export default function Footer() {
   return (
@@ -19,7 +20,10 @@ export default function Footer() {
       </Flex>
       <AbsoluteCenter textAlign="center">
         <Text color="teal" fontWeight="500">
-          Made with ❤️ by Shokahobo
+          Made with ❤️ by{" "}
+          <Link href="https://bohobytes.com" isExternal>
+            BohoBytes
+          </Link>
         </Text>
       </AbsoluteCenter>
     </Box>

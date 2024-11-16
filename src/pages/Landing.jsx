@@ -65,7 +65,7 @@ export default function Landing() {
   return (
     <Main>
       <Center width="100%">
-        <BaseCard w="50%">
+        <BaseCard w="50%" st={{ minWidth: 350 }}>
           <Box textShadow={"1px 0px 1px dimgrey"} textAlign={"center"}>
             {!tagData && <Spinner margin="auto" size="md" color="teal" />}
             {tagData?.length > 0 && (
