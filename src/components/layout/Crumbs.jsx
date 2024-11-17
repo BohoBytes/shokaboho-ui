@@ -85,7 +85,10 @@ export default function Crumbs() {
       }
     >
       {crumbs?.map(({ to, label }, index) => (
-        <BreadcrumbItem key={index} isCurrentPage={index === paths.length - 1}>
+        <BreadcrumbItem
+          key={index}
+          isCurrentPage={!isHome && index === paths.length - 1}
+        >
           <BreadcrumbLink href={`${to}`} color="teal" fontSize="md">
             {label}
           </BreadcrumbLink>
