@@ -31,18 +31,21 @@ export default function ConflictScreen() {
   }, [conflict]);
 
   const { displayName, name } = conflictInfo || {};
-  const hasAltName = displayName !== name;
 
   return (
     <Main>
       {!conflictInfo && <Spinner size="md" color="teal" />}
       {conflictInfo && (
         <Box px={10} width="100%">
-          <Heading textAlign="center" mt={10} mb={!hasAltName ? 10 : undefined}>
+          <Heading
+            textAlign="center"
+            mt={10}
+            mb={!displayName ? 10 : undefined}
+          >
             {name}
           </Heading>
 
-          {hasAltName && (
+          {displayName && (
             <Text textAlign="center" fontSize="2xl" color="pink.800" mb={10}>
               {displayName}
             </Text>

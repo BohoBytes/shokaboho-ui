@@ -3,6 +3,7 @@ import { Card, CardBody, Flex, Heading } from "@chakra-ui/react";
 
 export default function BaseCard({
   w = "100%",
+  h = "100%",
   title,
   img,
   bg = "#f5f5f5",
@@ -17,6 +18,7 @@ export default function BaseCard({
   return (
     <Card
       width={w}
+      height={h}
       borderRadius={!stripped ? 20 : 0}
       bg={bg}
       color={color}

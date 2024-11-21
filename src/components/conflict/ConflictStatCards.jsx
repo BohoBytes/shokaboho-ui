@@ -11,6 +11,7 @@ export default function ConflictStatCards({
     { type: "arrests", color: "yellow.700", value: arrests },
     { type: "missing", color: "pink.700", value: missing },
   ];
+
   return (
     <SimpleGrid minChildWidth={180} spacing={2} width="100%">
       {casualties.map(({ type, color, value }, key) => (
